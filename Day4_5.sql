@@ -1,6 +1,6 @@
---Q. STUDENT Å×ÀÌºí¿¡¼­ °¢ ÇĞ»ıÀÇ ÀüÈ­¹øÈ£¸¦ ¾Æ·¡ ¿¹½Ã¿Í °°ÀÌ º¯°æÇÏ½Ã¿À.
+--Q. STUDENT í…Œì´ë¸”ì—ì„œ ê° í•™ìƒì˜ ì „í™”ë²ˆí˜¸ë¥¼ ì•„ë˜ ì˜ˆì‹œì™€ ê°™ì´ ë³€ê²½í•˜ì‹œì˜¤.
 
---¿¹½Ã) 
+--ì˜ˆì‹œ) 
 --051)426-1700  => 051)XXX-1700
 --02)6255-9875  => 02)XXXX-9875
 
@@ -22,19 +22,19 @@ SELECT studno, name, id, grade, jumin, tel,
   
   
   
---Q. EMP Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© ÇöÀç±îÁö ±Ù¹«ÀÏ¼ö¸¦ YY³â MM°³¿ù DDÀÏ ÇüÅÂ·Î Ãâ·ÂÇÏ½Ã¿À.
+--Q. EMP í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ í˜„ì¬ê¹Œì§€ ê·¼ë¬´ì¼ìˆ˜ë¥¼ YYë…„ MMê°œì›” DDì¼ í˜•íƒœë¡œ ì¶œë ¥í•˜ì‹œì˜¤.
 
 --A.
 SELECT ename, sysdate, hiredate,
-       trunc(months_between(sysdate, hiredate)/12)||'³â '||
-       trunc(mod(months_between(sysdate, hiredate), 12))||'°³¿ù '||
-       trunc(sysdate - add_months(hiredate, trunc(months_between(sysdate, hiredate))))||'ÀÏ' workday       
+       trunc(months_between(sysdate, hiredate)/12)||'ë…„ '||
+       trunc(mod(months_between(sysdate, hiredate), 12))||'ê°œì›” '||
+       trunc(sysdate - add_months(hiredate, trunc(months_between(sysdate, hiredate))))||'ì¼' workday       
   FROM emp; 
   
 
 
 
---Q. STUDENT Å×ÀÌºíÀ» »ç¿ëÇÏ¿© °¢ ÇĞ»ıÀÇ ÀÌ¸§, ÇĞ³â, ¼ºº°À» Ãâ·ÂÇÏ½Ã¿À.
+--Q. STUDENT í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ ê° í•™ìƒì˜ ì´ë¦„, í•™ë…„, ì„±ë³„ì„ ì¶œë ¥í•˜ì‹œì˜¤.
 SELECT *
   FROM student;
 
@@ -53,8 +53,8 @@ SELECT name, grade, jumin,
   
   
 
---Q. emp Å×ÀÌºíÀ» »ç¿ëÇÏ¿© ¿¬ºÀ±âÁØ µî±ŞÀ» ¾Æ·¡ÀÇ ±âÁØ¿¡ ¸Â°Ô Ç¥ÇöÇÏ½Ã¿À.
--- 2000¹Ì¸¸ 'C', 2000ÀÌ»ó 3000ÀÌÇÏ 'B', 3000ÃÊ°ú 'A'
+--Q. emp í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ ì—°ë´‰ê¸°ì¤€ ë“±ê¸‰ì„ ì•„ë˜ì˜ ê¸°ì¤€ì— ë§ê²Œ í‘œí˜„í•˜ì‹œì˜¤.
+-- 2000ë¯¸ë§Œ 'C', 2000ì´ìƒ 3000ì´í•˜ 'B', 3000ì´ˆê³¼ 'A'
 
 --A. with decode
 SELECT ename, job, hiredate, sal,
