@@ -1,5 +1,4 @@
---Q. STUDENT, EXAM_01, DEPARTMENT 테이블을 사용하여 
---각 학생의 이름, 학년, 시험점수, 제1전공명, 제2전공명을 모두 출력
+--Q. STUDENT, EXAM_01, DEPARTMENT 테이블을 사용하여 각 학생의 이름, 학년, 시험점수, 제1전공명, 제2전공명을 모두 출력
 --단, 제2전공이 없는 경우 제1전공명 출력
 
 
@@ -63,8 +62,7 @@ SELECT e.name, e.empno, e.birthday,
  ORDER BY age desc;
  
  
---Q. emp2, dept2 테이블에서 각 직원과 나이가 같으면서 
---취미가 같은 직원의 수를 직원의 이름, 부서이름, 취미, 
+--Q. emp2, dept2 테이블에서 각 직원과 나이가 같으면서 취미가 같은 직원의 수를 직원의 이름, 부서이름, 취미, 
 --pay와 함께 출력하여라.(본인 제외, 취미가 같은 동료가 없는 직원도 출력)
 
 --[예시]
@@ -111,3 +109,6 @@ select s1.name 이름, s1.grade 학년, s1.weight 몸무게, e.total 점수, cou
    and s1.studno = e.studno 
  group by s1.name, s1.grade, s1.weight, e.total
  order by 1;
+
+
+
