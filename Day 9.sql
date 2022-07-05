@@ -1,37 +1,37 @@
---Q. dept2 Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© »óÀ§ºÎ¼­¸íÀ» ´ÙÀ½°í °°ÀÌ Ãâ·Â -> "°æ¿µÁö¿øºÎÀÇ »óÀ§ºÎ¼­´Â »çÀå½Ç ÀÔ´Ï´Ù."
---   ´Ü, »óÀ§ºÎ¼­°¡ ¾ø´Â °æ¿ì´Â º»ÀÎºÎ¼­¸í Ãâ·Â.
+--Q. dept2 í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ìƒìœ„ë¶€ì„œëª…ì„ ë‹¤ìŒê³  ê°™ì´ ì¶œë ¥ -> "ê²½ì˜ì§€ì›ë¶€ì˜ ìƒìœ„ë¶€ì„œëŠ” ì‚¬ì¥ì‹¤ ì…ë‹ˆë‹¤."
+--   ë‹¨, ìƒìœ„ë¶€ì„œê°€ ì—†ëŠ” ê²½ìš°ëŠ” ë³¸ì¸ë¶€ì„œëª… ì¶œë ¥.
 
 
 --A. 
 --JOIN
 select d1.dname||
-       'ÀÇ »óÀ§ºÎ¼­´Â '|| 
+       'ì˜ ìƒìœ„ë¶€ì„œëŠ” '|| 
        nvl(d2.dname, d1.dname)
-       ||' ÀÔ´Ï´Ù.' ºÎ¼­Á¤º¸
+       ||' ì…ë‹ˆë‹¤.' ë¶€ì„œì •ë³´
   from dept2 d1, dept2 d2 
  where d1.pdept = d2.dcode(+);
 
 
 --SCALAR SUBQUERIES
 select d1.dname||
-       'ÀÇ »óÀ§ºÎ¼­´Â '||
+       'ì˜ ìƒìœ„ë¶€ì„œëŠ” '||
        nvl((select d2.dname
               from dept2 d2 
              where d1.pdept = d2.dcode), d1.dname)
-       ||' ÀÔ´Ï´Ù.' ºÎ¼­Á¤º¸
+       ||' ì…ë‹ˆë‹¤.' ë¶€ì„œì •ë³´
   from dept2 d1;
 
 
 
 
 
---Q. professor Å×ÀÌºí¿¡¼­ ÀÔ»ç³âµµ(1980,1990,2000³â´ë...)º° Æò±Õ¿¬ºÀº¸´Ù ³ôÀº ¿¬ºÀÀ» ¹Ş´Â ±³¼öÀÇ 
---   ÀÌ¸§, ÇĞ°ú¸í, ¿¬ºÀ, ÁöµµÇĞ»ı ¼ö Ãâ·Â. (Áöµµ ÇĞ»ıÀÌ ¾ø´Â °æ¿ì 0¸í Ãâ·Â)
+--Q. professor í…Œì´ë¸”ì—ì„œ ì…ì‚¬ë…„ë„(1980,1990,2000ë…„ëŒ€...)ë³„ í‰ê· ì—°ë´‰ë³´ë‹¤ ë†’ì€ ì—°ë´‰ì„ ë°›ëŠ” êµìˆ˜ì˜ 
+--   ì´ë¦„, í•™ê³¼ëª…, ì—°ë´‰, ì§€ë„í•™ìƒ ìˆ˜ ì¶œë ¥. (ì§€ë„ í•™ìƒì´ ì—†ëŠ” ê²½ìš° 0ëª… ì¶œë ¥)
 
 
 --A. 
 --INLINE VIEW
-select p.name, d.dname, p.pay, count(s.studno) as ÇĞ»ı¼ö
+select p.name, d.dname, p.pay, count(s.studno) as í•™ìƒìˆ˜
   from professor p, department d, student s,
       (select trunc(to_char(hiredate, 'YYYY'), -1) as hyear,
               avg(pay) as avg_pay 
@@ -45,7 +45,7 @@ select p.name, d.dname, p.pay, count(s.studno) as ÇĞ»ı¼ö
 
 
 --CORRELATED SUBQUERY
-select p1.name, d.dname, p1.pay, count(s.studno) as ÇĞ»ı¼ö
+select p1.name, d.dname, p1.pay, count(s.studno) as í•™ìƒìˆ˜
   from professor p1, department d, student s 
  where p1.pay > (select avg(pay)
                    from professor p2 
@@ -59,57 +59,57 @@ select p1.name, d.dname, p1.pay, count(s.studno) as ÇĞ»ı¼ö
  
  
  
---Q. emp Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© ºÎ¼­¿¡¼­ º»ÀÎº¸´Ù ÀÔ»ç³âµµ°¡ ºü¸¥ »ç¶÷ÀÇ ¼ö¸¦ °¢ Á÷¿øÀÇ ÀÌ¸§, ºÎ¼­¸í°ú ÇÔ²² Ãâ·Â.
---   ´Ü, ¼±¹è¼ö°¡ ¸¹Àº »ç¶÷ ¼øÀ¸·Î Á¤·ÄÇÏ¶ó.
+--Q. emp í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ë¶€ì„œì—ì„œ ë³¸ì¸ë³´ë‹¤ ì…ì‚¬ë…„ë„ê°€ ë¹ ë¥¸ ì‚¬ëŒì˜ ìˆ˜ë¥¼ ê° ì§ì›ì˜ ì´ë¦„, ë¶€ì„œëª…ê³¼ í•¨ê»˜ ì¶œë ¥.
+--   ë‹¨, ì„ ë°°ìˆ˜ê°€ ë§ì€ ì‚¬ëŒ ìˆœìœ¼ë¡œ ì •ë ¬í•˜ë¼.
 
 
 --A. 
 --JOIN
-select e1.ename, d.dname, count(e2.ename) as ¼±¹è¼ö
+select e1.ename, d.dname, count(e2.ename) as ì„ ë°°ìˆ˜
   from emp e1, emp e2, dept d 
  where e1.deptno = e2.deptno(+) 
    and e1.hiredate > e2.hiredate(+) 
    and e1.deptno = d.deptno 
  group by e1.ename, d.dname
- order by ¼±¹è¼ö desc;
+ order by ì„ ë°°ìˆ˜ desc;
  
 
 --SCALAR SUBQUERIES
 select e1.ename,
       (select d.dname 
          from dept d 
-        where e1.deptno = d.deptno) as ºÎ¼­¸í,
+        where e1.deptno = d.deptno) as ë¶€ì„œëª…,
       (select count(e2.ename) 
          from emp e2 
         where e1.deptno = e2.deptno 
-          and e1.hiredate > e2.hiredate) as ¼±¹è¼ö 
+          and e1.hiredate > e2.hiredate) as ì„ ë°°ìˆ˜ 
   from emp e1
- order by ¼±¹è¼ö desc;
+ order by ì„ ë°°ìˆ˜ desc;
  
  
  
  
  
- --Q. ´ÙÀ½ ÇüÅÂ·Î Ãâ·Â(professor, student, exam_01, hakjum, department)
---    ±³¼öº°·Î °¢ ±³¼öÀÇ ÁöµµÇĞ»ıµéÀÇ ½ÃÇè¼ºÀûÀÇ Æò±Õ°ú
---    ÁöµµÇĞ»ıµéÀÇ ÇĞÁ¡ ºĞÆ÷¸¦ A,B,C,D·Î ±¸ºĞÇØ¼­ Ãâ·ÂÇÏ°í ±³¼öÀÇ ¼Ò¼Ó ÇĞ°ú¸íµµ ÇÔ²² Ãâ·Â
+--Q. ë‹¤ìŒ í˜•íƒœë¡œ ì¶œë ¥(professor, student, exam_01, hakjum, department)
+--   êµìˆ˜ë³„ë¡œ ê° êµìˆ˜ì˜ ì§€ë„í•™ìƒë“¤ì˜ ì‹œí—˜ì„±ì ì˜ í‰ê· ê³¼
+--   ì§€ë„í•™ìƒë“¤ì˜ í•™ì  ë¶„í¬ë¥¼ A,B,C,Dë¡œ êµ¬ë¶„í•´ì„œ ì¶œë ¥í•˜ê³  êµìˆ˜ì˜ ì†Œì† í•™ê³¼ëª…ë„ í•¨ê»˜ ì¶œë ¥
 
---±³¼ö¸í         ±³¼öÇĞ°ú¸í  ÇĞ»ı¼ºÀûÆò±Õ   AÇĞÁ¡ÀÚ¼ö   BÇĞÁ¡ÀÚ¼ö   CÇĞÁ¡ÀÚ¼ö   DÇĞÁ¡ÀÚ¼ö
---±èµµÇü	¼ÒÇÁÆ®¿ş¾î°øÇĞ°ú	0	        0	        0	        0	        0
---±è¿µÁ¶	¸ÖÆ¼¹Ìµğ¾î°øÇĞ°ú	87	        0	        1	        0	        0
---±èÇöÁ¤	¼ÒÇÁÆ®¿ş¾î°øÇĞ°ú	0	        0	        0	        0	        0
---³ªÇÑ¿­	¼ÒÇÁÆ®¿ş¾î°øÇĞ°ú	83	        0	        1	        0	        0
---¹Ùºñ	    È­ÇĞ°øÇĞ°ú	        0	        0	        0	        0	        0
+--êµìˆ˜ëª…         êµìˆ˜í•™ê³¼ëª…  í•™ìƒì„±ì í‰ê·    Aí•™ì ììˆ˜   Bí•™ì ììˆ˜   Cí•™ì ììˆ˜   Dí•™ì ììˆ˜
+--ê¹€ë„í˜•	ì†Œí”„íŠ¸ì›¨ì–´ê³µí•™ê³¼	0	        0	        0	        0	        0
+--ê¹€ì˜ì¡°	ë©€í‹°ë¯¸ë””ì–´ê³µí•™ê³¼	87	        0	        1	        0	        0
+--ê¹€í˜„ì •	ì†Œí”„íŠ¸ì›¨ì–´ê³µí•™ê³¼	0	        0	        0	        0	        0
+--ë‚˜í•œì—´	ì†Œí”„íŠ¸ì›¨ì–´ê³µí•™ê³¼	83	        0	        1	        0	        0
+--ë°”ë¹„	    í™”í•™ê³µí•™ê³¼	        0	        0	        0	        0	        0
  
  
 --A.
-select p.name as ±³¼ö¸í, 
-       d.dname as ±³¼öÇĞ°ú¸í,
-       round(nvl(avg(e.total), 0)) as ÇĞ»ı¼ºÀûÆò±Õ, 
-       count(decode(substr(h.grade, 1, 1), 'A', 1)) AÇĞÁ¡ÀÚ¼ö,
-       count(decode(substr(h.grade, 1, 1), 'B', 1)) BÇĞÁ¡ÀÚ¼ö,
-       count(decode(substr(h.grade, 1, 1), 'C', 1)) CÇĞÁ¡ÀÚ¼ö,
-       count(decode(substr(h.grade, 1, 1), 'D', 1)) DÇĞÁ¡ÀÚ¼ö
+select p.name as êµìˆ˜ëª…, 
+       d.dname as êµìˆ˜í•™ê³¼ëª…,
+       round(nvl(avg(e.total), 0)) as í•™ìƒì„±ì í‰ê· , 
+       count(decode(substr(h.grade, 1, 1), 'A', 1)) Aí•™ì ììˆ˜,
+       count(decode(substr(h.grade, 1, 1), 'B', 1)) Bí•™ì ììˆ˜,
+       count(decode(substr(h.grade, 1, 1), 'C', 1)) Cí•™ì ììˆ˜,
+       count(decode(substr(h.grade, 1, 1), 'D', 1)) Dí•™ì ììˆ˜
   from professor p, department d, student s, exam_01 e, hakjum h 
  where p.deptno = d.deptno 
    and p.profno = s.profno(+) 
