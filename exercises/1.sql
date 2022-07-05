@@ -69,4 +69,5 @@ SELECT ename, job, hiredate, sal,
                              ELSE 'A' END grade
   FROM emp;
 
+
   
