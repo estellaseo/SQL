@@ -1,11 +1,11 @@
---Q. student Å×ÀÌºí¿¡¼­ °°ÀºÁö¿ªÀÌ¸é¼­ °°Àº ¼ºº°ÀÇ Ä£±¸°¡ ¸î¸íÀÎÁö ±¸ÇÏ°í, 
---   ±× ÇĞ»ıÀÇ ´ã´ç ±³¼öÀÌ¸§µµ ÇÔ²² Ãâ·ÂµÇµµ·Ï ÇÏ¿©¶ó.
---   ´Ü, °°ÀºÁö¿ª(ÀüÈ­¹øÈ£ ÄÃ·³ »ç¿ë), °°Àº ¼ºº°(ÁÖ¹Î¹øÈ£ »ç¿ë)¿¡ º»ÀÎÀº Æ÷ÇÔµÉ ¼ö ¾ø´Ù.
+--Q. student í…Œì´ë¸”ì—ì„œ ê°™ì€ì§€ì—­ì´ë©´ì„œ ê°™ì€ ì„±ë³„ì˜ ì¹œêµ¬ê°€ ëª‡ëª…ì¸ì§€ êµ¬í•˜ê³ , 
+--   ê·¸ í•™ìƒì˜ ë‹´ë‹¹ êµìˆ˜ì´ë¦„ë„ í•¨ê»˜ ì¶œë ¥ë˜ë„ë¡ í•˜ì—¬ë¼.
+--   ë‹¨, ê°™ì€ì§€ì—­(ì „í™”ë²ˆí˜¸ ì»¬ëŸ¼ ì‚¬ìš©), ê°™ì€ ì„±ë³„(ì£¼ë¯¼ë²ˆí˜¸ ì‚¬ìš©)ì— ë³¸ì¸ì€ í¬í•¨ë  ìˆ˜ ì—†ë‹¤.
  
 
 --A.
 --ORACLE STANDARD
-select s.name ÀÌ¸§, count(s2.studno) Ä£±¸¼ö, p.name ±³¼ö¸í
+select s.name ì´ë¦„, count(s2.studno) ì¹œêµ¬ìˆ˜, p.name êµìˆ˜ëª…
   from student s, student s2,  professor p 
  where substr(s.tel, 1, instr(s.tel, ')')-1) = substr(s2.tel(+), 1, instr(s2.tel(+), ')')-1)
    and substr(s.jumin, 7, 1) = substr(s2.jumin(+), 7, 1)
@@ -16,7 +16,7 @@ select s.name ÀÌ¸§, count(s2.studno) Ä£±¸¼ö, p.name ±³¼ö¸í
  
  
 --ANSI STANDARD
-select s.name ÀÌ¸§, count(s2.studno) Ä£±¸¼ö, p.name ±³¼ö¸í
+select s.name ì´ë¦„, count(s2.studno) ì¹œêµ¬ìˆ˜, p.name êµìˆ˜ëª…
   from student s left outer join student s2
     on substr(s.tel, 1, instr(s.tel, ')')-1) = substr(s2.tel, 1, instr(s2.tel, ')')-1)
    and substr(s.jumin, 7, 1) = substr(s2.jumin, 7, 1)
@@ -30,8 +30,8 @@ select s.name ÀÌ¸§, count(s2.studno) Ä£±¸¼ö, p.name ±³¼ö¸í
 
 
  
---Q. emp, dept Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© º»ÀÎ°ú »óÀ§°ü¸®ÀÚÀÇ Æò±Õ¿¬ºÀº¸´Ù ¸¹Àº ¿¬ºÀÀ» ¹Ş´Â Á÷¿øÀÇ
---   ÀÌ¸§, ºÎ¼­¸í, ¿¬ºÀ, »óÀ§°ü¸®ÀÚ¸íÀ» Ãâ·ÂÇÏ¿©¶ó.
+--Q. emp, dept í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ë³¸ì¸ê³¼ ìƒìœ„ê´€ë¦¬ìì˜ í‰ê· ì—°ë´‰ë³´ë‹¤ ë§ì€ ì—°ë´‰ì„ ë°›ëŠ” ì§ì›ì˜
+--   ì´ë¦„, ë¶€ì„œëª…, ì—°ë´‰, ìƒìœ„ê´€ë¦¬ìëª…ì„ ì¶œë ¥í•˜ì—¬ë¼.
 
 
 --A. 
@@ -55,13 +55,13 @@ select e1.ename, d.dname, e1.sal, e2.ename
 
 
 
---Q. À§¿¡¼­ °¢ ÇĞ»ıº°·Î °°Àº ÇĞ³â ³» ½ÃÇèÀ» ´õ Àß º» Ä£±¸ÀÇ ¼ö¸¦ ÇĞ»ıÀÌ¸§, Á¦1Àü°ø¸í, 
---   ÇĞ³â, ½ÃÇè¼ºÀû°ú ÇÔ²² Ãâ·Â(´Ü, º»ÀÎº¸´Ù ½ÃÇèÀ» Àß º» Ä£±¸°¡ ¾ø¾îµµ Ãâ·Â)
+--Q. ìœ„ì—ì„œ ê° í•™ìƒë³„ë¡œ ê°™ì€ í•™ë…„ ë‚´ ì‹œí—˜ì„ ë” ì˜ ë³¸ ì¹œêµ¬ì˜ ìˆ˜ë¥¼ í•™ìƒì´ë¦„, ì œ1ì „ê³µëª…, 
+--   í•™ë…„, ì‹œí—˜ì„±ì ê³¼ í•¨ê»˜ ì¶œë ¥(ë‹¨, ë³¸ì¸ë³´ë‹¤ ì‹œí—˜ì„ ì˜ ë³¸ ì¹œêµ¬ê°€ ì—†ì–´ë„ ì¶œë ¥)
 
 
 --A.
 --ORACLE STANDARD
-select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as Ä£±¸¼ö
+select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as ì¹œêµ¬ìˆ˜
   from (select s1.name, s1.deptno1, s1.grade, e1.total
           from student s1, exam_01 e1 
          where s1.studno = e1.studno) i1,
@@ -77,7 +77,7 @@ select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as Ä£±¸¼ö
 
 
 --ANSI STANDARD
-select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as Ä£±¸¼ö
+select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as ì¹œêµ¬ìˆ˜
   from (select s1.name, s1.deptno1, s1.grade, e1.total
           from student s1, exam_01 e1 
          where s1.studno = e1.studno) i1 left outer join
@@ -95,16 +95,16 @@ select i1.name, d.dname, i1.grade, i1.total, count(i2.name) as Ä£±¸¼ö
 
 
 
---Q. emloyees Å×ÀÌºíÀ» »ç¿ëÇÏ¿© °¢ Á÷¿øÀÇ ÀÔ»çµ¿±â(ÀÔ»çÇÑ ÇØ°¡ °°Àº °æ¿ì)ÀÇ ¼ö¸¦
---   °¢ Á÷¿øÀÇ ÀÌ¸§, ¿¬ºÀ, »óÀ§°ü¸®ÀÚ ÀÌ¸§(first_name) Á¤º¸¿Í ÇÔ²² Ãâ·Â
---   ´Ü, ÀÔ»çµ¿±â¿¡ º»ÀÎÀº Æ÷ÇÔÇÏÁö ¾Ê´Â´Ù
---   (ÀÔ»ç µ¿±â°¡ ¾ø´Â °æ¿ì, »óÀ§°ü¸®ÀÚ°¡ ¾ø´Â °æ¿ìµµ Ãâ·Â)
+--Q. emloyees í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ ê° ì§ì›ì˜ ì…ì‚¬ë™ê¸°(ì…ì‚¬í•œ í•´ê°€ ê°™ì€ ê²½ìš°)ì˜ ìˆ˜ë¥¼
+--   ê° ì§ì›ì˜ ì´ë¦„, ì—°ë´‰, ìƒìœ„ê´€ë¦¬ì ì´ë¦„(first_name) ì •ë³´ì™€ í•¨ê»˜ ì¶œë ¥
+--   ë‹¨, ì…ì‚¬ë™ê¸°ì— ë³¸ì¸ì€ í¬í•¨í•˜ì§€ ì•ŠëŠ”ë‹¤
+--   (ì…ì‚¬ ë™ê¸°ê°€ ì—†ëŠ” ê²½ìš°, ìƒìœ„ê´€ë¦¬ìê°€ ì—†ëŠ” ê²½ìš°ë„ ì¶œë ¥)
 
 
 --A.
 --ORACLE STANDARD
-select e1.first_name, e1.hire_date, e1.salary, e3.first_name as »óÀ§°ü¸®ÀÚ,
-       count(e2.first_name) as µ¿±â¼ö 
+select e1.first_name, e1.hire_date, e1.salary, e3.first_name as ìƒìœ„ê´€ë¦¬ì,
+       count(e2.first_name) as ë™ê¸°ìˆ˜ 
   from employees e1, 
        employees e2,
        employees e3
@@ -115,8 +115,8 @@ select e1.first_name, e1.hire_date, e1.salary, e3.first_name as »óÀ§°ü¸®ÀÚ,
  
 
 --ANSI STANDARD
-select e1.first_name, e1.hire_date, e1.salary, e3.first_name as »óÀ§°ü¸®ÀÚ,
-       count(e2.first_name) as µ¿±â¼ö 
+select e1.first_name, e1.hire_date, e1.salary, e3.first_name as ìƒìœ„ê´€ë¦¬ì,
+       count(e2.first_name) as ë™ê¸°ìˆ˜ 
   from employees e1 left outer join employees e2 
     on to_char(e1.hire_date, 'YYYY') = to_char(e2.hire_date, 'YYYY')
    and e1.employee_id != e2.employee_id
