@@ -121,4 +121,4 @@ select p.name as 교수명,
  
  
  
- 
+  
