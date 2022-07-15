@@ -1,4 +1,4 @@
---Q. ´ÙÀ½ ºä¸¦ »ç¿ëÇÏ¿© desc emp °á°ú¿Í µ¿ÀÏÇÏ°Ô Ãâ·Â
+--Q. ë‹¤ìŒ ë·°ë¥¼ ì‚¬ìš©í•˜ì—¬ desc emp ê²°ê³¼ì™€ ë™ì¼í•˜ê²Œ ì¶œë ¥
 create view emp_test as select * 
   from user_tab_columns
  where table_name = 'EMP';
@@ -18,40 +18,50 @@ select column_name "Column",
   
   
 
---Q. ¾Æ·¡ Å×ÀÌºí »ı¼º ¹× ÀÛ¾÷ ÈÄ ½Ã°£´ëº° °¡Àå ÀÎ±âÀÖ´Â ¾÷Á¾
+--Q. ì•„ë˜ í…Œì´ë¸” ìƒì„± ë° ì‘ì—… í›„ ì‹œê°„ëŒ€ë³„ ê°€ì¥ ì¸ê¸°ìˆëŠ” ì—…ì¢…
 create table delivery(
-ÀÏÀÚ          varchar2(10),
-½Ã°£´ë        varchar2(10),
-¾÷Á¾          varchar2(40),
-½Ãµµ          varchar2(20),
-½Ã±º±¸        varchar2(20),
-À¾¸éµ¿        varchar2(20),
-ÅëÈ­°Ç¼ö      number);
+ì¼ì          varchar2(10),
+ì‹œê°„ëŒ€        varchar2(10),
+ì—…ì¢…          varchar2(40),
+ì‹œë„          varchar2(20),
+ì‹œêµ°êµ¬        varchar2(20),
+ìë©´ë™        varchar2(20),
+í†µí™”ê±´ìˆ˜      number);
 
 
 select count(*) from delivery;
 select * from delivery;
 
 
--- view »ı¼º
-create view view_order_some as select ½Ã°£´ë, ¾÷Á¾, sum(ÅëÈ­°Ç¼ö) ÁÖ¹®
+-- view ìƒì„±
+create view view_order_some as select ì‹œê°„ëŒ€, ì—…ì¢…, sum(í†µí™”ê±´ìˆ˜) ì£¼ë¬¸
   from delivery
- group by ½Ã°£´ë, ¾÷Á¾
- order by ½Ã°£´ë, ÁÖ¹® desc;
+ group by ì‹œê°„ëŒ€, ì—…ì¢…
+ order by ì‹œê°„ëŒ€, ì£¼ë¬¸ desc;
  
 
  
--- ½Ã°£´ëº° ¾÷Á¾, ÁÖ¹®¼ö 
+-- ì‹œê°„ëŒ€ë³„ ì—…ì¢…, ì£¼ë¬¸ìˆ˜ 
 select * from view_order_some;
 
 
--- ½Ã°£´ëº° °¡Àå ÀÎ±âÀÖ´Â ¾÷Á¾
-select v1.½Ã°£´ë, v1.¾÷Á¾, i.order_count ÁÖ¹®¼ö
-  from view_order_some v1, (select ½Ã°£´ë, max(ÁÖ¹®) order_count
+-- ì‹œê°„ëŒ€ë³„ ê°€ì¥ ì¸ê¸°ìˆëŠ” ì—…ì¢…
+select v1.ì‹œê°„ëŒ€, v1.ì—…ì¢…, i.order_count ì£¼ë¬¸ìˆ˜
+  from view_order_some v1, (select ì‹œê°„ëŒ€, max(ì£¼ë¬¸) order_count
                    from view_order_some
-                  group by ½Ã°£´ë
-                  order by ½Ã°£´ë) i 
- where v1.ÁÖ¹® = i.order_count;
+                  group by ì‹œê°„ëŒ€
+                  order by ì‹œê°„ëŒ€) i 
+ where v1.ì£¼ë¬¸ = i.order_count;
+ 
+ 
+--rank í•¨ìˆ˜ ì‚¬ìš©í•˜ê¸°
+select ì‹œê°„ëŒ€, ì—…ì¢…, ì£¼ë¬¸ìˆ˜
+  from (select ì‹œê°„ëŒ€, ì—…ì¢…, sum(í†µí™”ê±´ìˆ˜) as ì£¼ë¬¸ìˆ˜,
+               rank() over(partition by ì‹œê°„ëŒ€ order by sum(í†µí™”ê±´ìˆ˜) desc) ìˆœìœ„
+          from delivery
+         group by ì‹œê°„ëŒ€, ì—…ì¢…)
+ where ìˆœìœ„ = 1;
+ 
  
  
  
